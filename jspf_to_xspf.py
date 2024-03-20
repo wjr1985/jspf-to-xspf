@@ -10,16 +10,16 @@ args = parser.parse_args()
 x = xspf.Xspf()
 fj = open(args.importfile,'r')
 jdata = json.load(fj)
-for playlist in jdata["playlists"]:
-  print("Converting Playlist %s" % playlist["title"])
-  x.title = "%s" % playlist["title"]
+playlist = jdata["playlist"]
+print("Converting Playlist %s" % playlist["title"])
+x.title = "%s" % playlist["title"]
 # You can set these attributes:
 # title, creator, annotation, info, location, identifier, image, date, license
-  for track in playlist["tracks"]:
+for track in playlist["track"]:
     # Add tracks by creating a Track object
     tr1 = xspf.Track()
     tr1.title = "%s" % track["title"]
-    tr1.creator = "%s" % track["artist"]
+    tr1.creator = "%s" % track["creator"]
     tr1.album = "%s" % track["album"]
     x.add_track(tr1)
 fj.close()
